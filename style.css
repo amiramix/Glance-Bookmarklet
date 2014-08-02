@@ -99,7 +99,7 @@ body{
     font-size: 32px;
 }
 .spritz_pivot{
-    color: #dc322f;
+    /*color: #dc322f;*/
 }
 
 @media (max-width: 599px) {
