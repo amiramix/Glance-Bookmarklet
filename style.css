@@ -75,6 +75,7 @@ body{
 
 #spritz_selector, #spritz_toggle{
     position: absolute;
+    max-width: 150px;
 }
 
 #spritz_selector{
