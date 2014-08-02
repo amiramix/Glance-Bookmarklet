@@ -3,9 +3,8 @@ body{
 }
 
 #spritz_holder{
-
     box-shadow: 2px 2px 4px rgba(0, 0, 0, .2);
-    background-color: #ffffff;
+    background-color: #002b36;
     position: fixed;
     top: 0;
     left: 0;
@@ -25,12 +24,13 @@ body{
 }
 
 #spritz_container{
-    background-color: #ffffff;
+    background-color: #002b36;
     /* 600px+; small tablet portrait */
     width: 420px;
     margin-left: auto;
     margin-right: auto;
     line-height: 43px;
+    color: #839496;
 }
 
 #spritz_result{
@@ -46,7 +46,7 @@ body{
 #guide_top, #guide_bottom{
     text-align: center;
     font-family: 'Droid Sans Mono', sans-serif;
-    color: #dddddd;
+    color: #073642;
     /* 600px+; small tablet portrait */
     font-size: 32px;
 }
@@ -54,7 +54,7 @@ body{
 #notch{
     text-align: center;
     font-family: 'Droid Sans Mono', sans-serif;
-    color: #dddddd;    
+    color: #073642;
     /* 600px+; small tablet portrait */
     margin-top: 9px;
     padding-top: 12px;
@@ -69,18 +69,24 @@ body{
 }
 
 #spritz_credits a{
-    color: #dddddd;
+    color: #073642;
     text-decoration: none;
 }
 
 #spritz_selector, #spritz_toggle{
-    float: left;
-    width: auto;
+    position: absolute;
+}
+
+#spritz_selector{
+    left:0;
+}
+#spritz_toggle{
+    right:0;
 }
 
 .invisible{
     font-family: 'Droid Sans Mono', sans-serif;
-    color: #ffffff;
+    color: #002b36;
     position: static;
 }
 
