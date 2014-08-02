@@ -8,7 +8,7 @@ var diffbot_token = '2efef432c72b5a923408e04353c39a7c';
 
 function create_spritz(){
     spritz_loader = function() {
-        var commit = "8b929461699f46898093d18ec919ef7083e8fdeb";
+        var commit = "e53f1c8c247e238568d793e7dc154dc817c8b872";
         getURL("https://rawgit.com/raymond-w-ko/Glance/" + commit + "/spritz.html", function(data){
             var spritzContainer = document.getElementById("spritz_container");
 
