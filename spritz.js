@@ -1,7 +1,6 @@
 // spritz.js
 // A JavaScript Speed Reader
-// rich@gun.io
-// https://github.com/Miserlou/OpenSpritz
+// originally by rich@gun.io
 
 // Please don't abuse this.
 var readability_token = '172b057cd7cfccf27b60a36f16b1acde12783893';
