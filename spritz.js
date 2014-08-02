@@ -22,7 +22,7 @@ function create_spritz(){
         // RawGit's CDN usage:
         // "Since files are not refreshed after the first request,
         // it's best to use a specific tag or commit URL, not a branch URL."
-        var commit = "9e92c605032be16c986ed699d68e0acd3534e6b1";
+        var commit = "dc186d735b89fbb17f14676a3776858a74118a5f";
         getURL("https://cdn.rawgit.com/rko/OpenSpritz/" + commit + "/spritz.html", function(data){
             var spritzContainer = document.getElementById("spritz_container");
 
