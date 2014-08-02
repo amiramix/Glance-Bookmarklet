@@ -8,11 +8,8 @@ var diffbot_token = '2efef432c72b5a923408e04353c39a7c';
 
 function create_spritz(){
     spritz_loader = function() {
-        // RawGit's CDN usage:
-        // "Since files are not refreshed after the first request,
-        // it's best to use a specific tag or commit URL, not a branch URL."
-        var commit = "5d75356ee3df9c1592bc70659f61862937a8dc1b";
-        getURL("https://cdn.rawgit.com/raymond-w-ko/Glance/" + commit + "/spritz.html", function(data){
+        var commit = "d399074428b2837e2f852ff6c5fd714623c1616b";
+        getURL("https://rawgit.com/raymond-w-ko/Glance/" + commit + "/spritz.html", function(data){
             var spritzContainer = document.getElementById("spritz_container");
 
             if (!spritzContainer) {
