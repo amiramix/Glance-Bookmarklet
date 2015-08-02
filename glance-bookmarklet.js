@@ -19,9 +19,9 @@ function createGlanceBookmarklet(){
         // XXX This won't work in Firefox because an old bug and won't work in Chrome because of security stuff:
         //getURL("glance-bookmarklet.html", function(data){
 
-        //getURL("https://rawgithub.com/raymond-w-ko/Glance-Bookmarklet/master/glance-bookmarklet.html", function(data){
+        //getURL("https://rawgit.com/raymond-w-ko/Glance-Bookmarklet/master/glance-bookmarklet.html", function(data){
 
-        getURL("https://rawgithub.com/raymond-w-ko/Glance-Bookmarklet/dev/glance-bookmarklet.html", function(data){
+        getURL("https://rawgit.com/raymond-w-ko/Glance-Bookmarklet/dev/glance-bookmarklet.html", function(data){
 
         // XXX Make sure to replace the commit hash with the wanted one.
         //getURL("https://cdn.rawgit.com/raymond-w-ko/Glance-Bookmarklet/2c662c459fad7e4a045319d657945eb7176ebbef/glance-bookmarklet.html", function(data){
