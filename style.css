@@ -2,7 +2,8 @@ body{
     margin: 0px;
 }
 
-#spritz_holder{
+#glance_bookmarklet_holder{
+
     box-shadow: 2px 2px 4px rgba(0, 0, 0, .2);
     background-color: #002b36;
     position: fixed;
@@ -17,14 +18,14 @@ body{
     min-height: 166px;
 }
 
-#spritz_spacer{
+#glance_bookmarklet_spacer{
     width: 100%;
     /* 600px+; small tablet portrait */
     min-height: 210px;
 }
 
-#spritz_container{
-    background-color: #002b36;
+#glance_bookmarklet_container{
+    background-color: #ffffff;
     /* 600px+; small tablet portrait */
     width: 100%;
     margin-left: auto;
@@ -33,7 +34,7 @@ body{
     color: #839496;
 }
 
-#spritz_result{
+#glance_bookmarklet_result{
     text-align: center;
     font-family: 'Droid Sans Mono', sans-serif;
     /* 600px+; small tablet portrait */
@@ -61,28 +62,22 @@ body{
     font-size: 32px;
 }
 
-#spritz_credits{
+#glance_bookmarklet_credits{
     float: right;
     font-family: 'Droid Sans Mono', sans-serif;
     /* 600px+; small tablet portrait */
     font-size: 13px;
 }
 
-#spritz_credits a{
-    color: #073642;
+#glance_bookmarklet_credits a{
+    color: #dddddd;
     text-decoration: none;
 }
 
-#spritz_selector, #spritz_toggle{
-    position: absolute;
-    max-width: 150px;
-}
-
-#spritz_selector{
-    left:0;
-}
-#spritz_toggle{
-    right:0;
+#glance_bookmarklet_selector, #glance_bookmarklet_toggle{
+    float: left;
+    width: auto;
+>>>>>>> 7ba9a916c7ead664e4b4545d938cccc8e7c8b2d7
 }
 
 .invisible{
@@ -91,20 +86,21 @@ body{
     position: static;
 }
 
-.spritz_start, .spritz_pivot, .spritz_end{
-    color: #839496;
+.start, .pivot, .end, .glance_bookmarklet_start, .glance_bookmarklet_pivot, .glance_bookmarklet_end{
+    color: #333333;
+>>>>>>> 7ba9a916c7ead664e4b4545d938cccc8e7c8b2d7
     text-align: center;
     font-family: 'Droid Sans Mono', sans-serif;
     /* 600px+; small tablet portrait */
     font-size: 32px;
 }
-.spritz_pivot{
-    /*color: #dc322f;*/
+.pivot, .glance_bookmarklet_pivot{
+    color: #de0000;
 }
 
 @media (max-width: 599px) {
 
-    #spritz_holder{
+    #glance_bookmarklet_holder{
         width: 320
         padding-top: 4px;
         padding-bottom: 6px;
@@ -112,18 +108,18 @@ body{
         min-height: 70px;
     }
 
-    #spritz_spacer{
+    #glance_bookmarklet_spacer{
         min-height: 105px;
     }
 
-    #spritz_container{
+    #glance_bookmarklet_container{
         width: 320px;
         margin-left: auto;
         margin-right: auto;
         line-height: 22px;
     }
 
-    #spritz_result{
+    #glance_bookmarklet_result{
         min-height: 22px;
         font-size: 22px;
         padding-top: 11px;
@@ -140,11 +136,11 @@ body{
         font-size: 22px;
     }
 
-    #spritz_credits{
+    #glance_bookmarklet_credits{
         font-size: 10px;
     }
 
-    .spritz_start, .spritz_pivot, .spritz_end{
+    .start, .pivot, .end, .glance_bookmarklet_start, .glance_bookmarklet_pivot, .glance_bookmarklet_end{
         font-size: 22px;
     }
 
