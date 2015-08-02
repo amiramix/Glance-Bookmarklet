@@ -21,10 +21,10 @@ function createGlanceBookmarklet(){
 
         //getURL("https://rawgit.com/raymond-w-ko/Glance-Bookmarklet/master/glance-bookmarklet.html", function(data){
 
-        getURL("https://rawgit.com/raymond-w-ko/Glance-Bookmarklet/dev/glance-bookmarklet.html", function(data){
+        // getURL("https://rawgit.com/raymond-w-ko/Glance-Bookmarklet/dev/glance-bookmarklet.html", function(data){
 
         // XXX Make sure to replace the commit hash with the wanted one.
-        //getURL("https://cdn.rawgit.com/raymond-w-ko/Glance-Bookmarklet/2c662c459fad7e4a045319d657945eb7176ebbef/glance-bookmarklet.html", function(data){
+        getURL("https://cdn.rawgit.com/raymond-w-ko/Glance-Bookmarklet/e1abd4f8255bc9b867ebbf44b6d20c95d7485184/glance-bookmarklet.html", function(data){
 
             var glanceBookmarkletContainer = document.getElementById("glance_bookmarklet_container");
 
