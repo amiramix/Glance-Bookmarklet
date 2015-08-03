@@ -183,7 +183,7 @@ function glanceBookmarkletify (input) {
         var selection = getSelectionText();
         if (selection) {
             stopGlanceBookmarklet();
-            toggle_button.removeEventListener(toggle);
+            toggle_button.removeEventListener("click", toggle);
             setTimeout(function() {
                 glanceBookmarkletify(selection);
             }, 0.001);
