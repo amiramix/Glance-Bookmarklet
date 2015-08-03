@@ -91,13 +91,13 @@ body{
     color: #839496;    
     background-color: #002b36;
     position: absolute;
-    bottom: 8;
-    left: 0;
+    bottom: 8px;
+    left: 8px;
     width: 100px;
     height: 22px;
 }
 #glance_bookmarklet_toggle {
-    left: 108px;
+    left: 116px;
 }
 
 .invisible{
