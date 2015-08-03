@@ -215,7 +215,7 @@ function pivot(word) {
     };
 
     word = decodeEntities(word);
-    var start = '.'.repeat((11-bestLetter)) + word.slice(0, bestLetter-1).replace('.', '&#8226;');
+    var start = '.'.repeat((7-bestLetter)) + word.slice(0, bestLetter-1).replace('.', '&#8226;');
     var middle = word.slice(bestLetter-1,bestLetter).replace('.', '&#8226;');
     var end = word.slice(bestLetter, length).replace('.', '&#8226;') + '.'.repeat((11-(word.length-bestLetter)));
 
