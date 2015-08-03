@@ -8,7 +8,6 @@ var readability_token = '172b057cd7cfccf27b60a36f16b1acde12783893';
 var diffbot_token = '2efef432c72b5a923408e04353c39a7c';
 
 function createGlanceBookmarklet(){
-
     glanceBookmarkletLoader = function() {
         // XXX RawGit's CDN usage:
            // "Since files are not refreshed after the first request,
@@ -68,7 +67,6 @@ function hideGlanceBookmarklet(){
 // Entry point to the beef.
 // Gets the WPM and the selected text, if any.
 function glanceBookmarklet(){
-
     var wpm = parseInt(document.getElementById("glance_bookmarklet_selector").value, 10);
     if(wpm < 1){
         return;

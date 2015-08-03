@@ -28,7 +28,7 @@ body{
     background-color: #002b36;
     color: #839496;
     /* 600px+; small tablet portrait */
-    width: 420px;
+    width: 440px;
     margin-left: auto;
     margin-right: auto;
     line-height: 43px;
@@ -52,12 +52,12 @@ body{
     font-size: 32px;
 }
 #guide_top {
-    border-style: solid;
-    border-bottom: thick #839496;
+    border-style: none;
+    border-bottom: thick solid #839496;
 }
 #guide_bottom {
-    border-style: solid;
-    border-top: thick #839496;
+    border-style: none;
+    border-top: thick solid #839496;
 }
 
 #notch{
@@ -117,11 +117,11 @@ body{
 @media (max-width: 599px) {
 
     #glance_bookmarklet_holder{
-        width: 320
+        width: 320;
         padding-top: 4px;
         padding-bottom: 6px;
         margin-bottom: 6px;
-        min-height: 70px;
+        min-height: 88px;
     }
 
     #glance_bookmarklet_spacer{
