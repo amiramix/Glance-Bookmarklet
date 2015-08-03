@@ -22,7 +22,7 @@ function createGlanceBookmarklet(){
         // getURL("https://rawgit.com/raymond-w-ko/Glance-Bookmarklet/dev/glance-bookmarklet.html", function(data){
 
         // XXX Make sure to replace the commit hash with the wanted one.
-        var commit = '';
+        var commit = '44c4746d3348e1eeb1c904fab6b3a2f75b300ad3';
         getURL("https://cdn.rawgit.com/raymond-w-ko/Glance-Bookmarklet/" + commit + "/glance-bookmarklet.html", function(data) {
             var glanceBookmarkletContainer = document.getElementById("glance_bookmarklet_container");
 
