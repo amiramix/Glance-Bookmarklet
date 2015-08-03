@@ -153,13 +153,15 @@ function glanceBookmarkletify (input) {
     var running = true;
     var glanceBookmarkletTimers = new Array();
 
-    document.getElementById("glance_bookmarklet_toggle").addEventListener("click", function() {
+    var toggle_button = document.getElementById("glance_bookmarklet_toggle");
+    function toggle() {
         if(running) {
             stopGlanceBookmarklet();
         } else {
             startGlanceBookmarklet();
         }
-    });
+    }
+    toggle_button.addEventListener("click", toggle);
 
     function showWordAtIndex(i) {
         var word = all_words[i];
@@ -173,7 +175,6 @@ function glanceBookmarkletify (input) {
         var delay_per_char = ms_per_word / 5;
         var delay = Math.max(5, word.length) * delay_per_char;
         delay = Math.ceil(delay);
-        console.log(delay);
         return delay;
     }
 
@@ -182,6 +183,7 @@ function glanceBookmarkletify (input) {
         var selection = getSelectionText();
         if (selection) {
             stopGlanceBookmarklet();
+            toggle_button.removeEventListener(toggle);
             setTimeout(function() {
                 glanceBookmarkletify(selection);
             }, 0.001);
