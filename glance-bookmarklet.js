@@ -35,7 +35,8 @@ function createGlanceBookmarklet(){
             };
 
             document.getElementById("glance_bookmarklet_selector").addEventListener("change", function(e) {
-                clearTimeouts();
+                // whimsically destroying a page's timeouts is very bad!!!
+                // clearTimeouts();
                 glanceBookmarklet();
             });
         });
@@ -67,12 +68,12 @@ function hideGlanceBookmarklet(){
 // Gets the WPM and the selected text, if any.
 function glanceBookmarklet(){
     var wpm = parseInt(document.getElementById("glance_bookmarklet_selector").value, 10);
-    if(wpm < 1){
+    if (wpm < 1) {
         return;
     }
 
     var selection = getSelectionText();
-    if(selection){
+    if (selection){
         glanceBookmarkletify(selection);
     }
     else{
@@ -81,7 +82,7 @@ function glanceBookmarklet(){
 }
 
 // The meat!
-function glanceBookmarkletify(input){
+function glanceBookmarkletify (input) {
 
     var wpm = parseInt(document.getElementById("glance_bookmarklet_selector").value, 10);
     var ms_per_word = 60000/wpm;
@@ -90,13 +91,11 @@ function glanceBookmarkletify(input){
     var all_words = input.split(/\s+/);
 
     // The reader won't stop if the selection starts or ends with spaces
-    if (all_words[0] == "")
-    {
+    if (all_words[0] == "") {
         all_words = all_words.slice(1, all_words.length);
     }
 
-    if (all_words[all_words.length - 1] == "")
-    {
+    if (all_words[all_words.length - 1] == "") {
         all_words = all_words.slice(0, all_words.length - 1);
     }
 
@@ -107,14 +106,21 @@ function glanceBookmarkletify(input){
     var temp_words = all_words.slice(0); // copy Array
     var t = 0;
 
-    for (var i=0; i<all_words.length; i++){
-
-        if(all_words[i].indexOf('.') != -1){
+    for (var i=0; i<all_words.length; i++) {
+        if(all_words[i].indexOf('.') != -1) {
             temp_words[t] = all_words[i].replace('.', '&#8226;');
         }
 
         // Double up on long words and words with commas.
-        if((all_words[i].indexOf(',') != -1 || all_words[i].indexOf(':') != -1 || all_words[i].indexOf('-') != -1 || all_words[i].indexOf('(') != -1|| all_words[i].length > 8) && all_words[i].indexOf('.') == -1){
+        if ((all_words[i].indexOf(',') != -1 ||
+             all_words[i].indexOf(':') != -1 ||
+             all_words[i].indexOf('-') != -1 ||
+             all_words[i].indexOf('(') != -1 ||
+             all_words[i].length > 8
+             )
+            &&
+            all_words[i].indexOf('.') == -1)
+        {
             temp_words.splice(t+1, 0, all_words[i]);
             temp_words.splice(t+1, 0, all_words[i]);
             t++;
@@ -122,7 +128,13 @@ function glanceBookmarkletify(input){
         }
 
         // Add an additional space after punctuation.
-        if(all_words[i].indexOf('.') != -1 || all_words[i].indexOf('!') != -1 || all_words[i].indexOf('?') != -1 || all_words[i].indexOf(':') != -1 || all_words[i].indexOf(';') != -1|| all_words[i].indexOf(')') != -1){
+        if (all_words[i].indexOf('.') != -1 ||
+            all_words[i].indexOf('!') != -1 ||
+            all_words[i].indexOf('?') != -1 ||
+            all_words[i].indexOf(':') != -1 ||
+            all_words[i].indexOf(';') != -1 ||
+            all_words[i].indexOf(')') != -1)
+        {
             temp_words.splice(t+1, 0, " ");
             temp_words.splice(t+1, 0, " ");
             temp_words.splice(t+1, 0, " ");
@@ -150,25 +162,57 @@ function glanceBookmarkletify(input){
     });
 
     function showWordAtIndex(i) {
-        var p = pivot(all_words[i]);
+        var word = all_words[i];
+        var p = pivot(word);
         document.getElementById("glance_bookmarklet_result").innerHTML = p;
         currentWord = i;
+        return word;
     }
 
+    function getWordDelay(word) {
+        var delay_per_char = ms_per_word / 5;
+        var delay = Math.max(5, word.length) * delay_per_char;
+        delay = Math.ceil(delay);
+        console.log(delay);
+        return delay;
+    }
+
+
     function startGlanceBookmarklet() {
+        var selection = getSelectionText();
+        if (selection) {
+            stopGlanceBookmarklet();
+            setTimeout(function() {
+                glanceBookmarkletify(selection);
+            }, 0.001);
+            return;
+        }
+
         document.getElementById("glance_bookmarklet_toggle").style.display = "block";
         document.getElementById("glance_bookmarklet_toggle").textContent = "Pause";
 
         running = true;
 
-        glanceBookmarkletTimers.push(setInterval(function() {
-            showWordAtIndex(currentWord);
+        var showNextWord;
+
+        showNextWord = function() {
+            while (glanceBookmarkletTimers.length > 0) {
+                clearTimeout(glanceBookmarkletTimers.pop());
+            }
+            var word = showWordAtIndex(currentWord);
             currentWord++;
-            if(currentWord >= all_words.length) {
+            if (currentWord >= all_words.length) {
                 currentWord = 0;
                 stopGlanceBookmarklet();
+                return;
             }
-        }, ms_per_word));
+
+            var delay = getWordDelay(word);
+            var id = setTimeout(showNextWord, delay);
+            glanceBookmarkletTimers.push(id);
+        }
+
+        showNextWord();
     }
 
     function stopGlanceBookmarklet() {
@@ -303,7 +347,7 @@ function glanceBookmarkletifyURL(){
 ////////////////////////////////////////////////////////////////////////////////
 
 // This is a hack using the fact that browers sequentially id the timers.
-function clearTimeouts(){
+function clearTimeouts() {
     var id = window.setTimeout(function() {}, 0);
     while (id--) {
         window.clearTimeout(id);
