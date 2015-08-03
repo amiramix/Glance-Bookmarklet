@@ -10,21 +10,20 @@ var diffbot_token = '2efef432c72b5a923408e04353c39a7c';
 function createGlanceBookmarklet(){
     glanceBookmarkletLoader = function() {
         // XXX RawGit's CDN usage:
-           // "Since files are not refreshed after the first request,
-           // it's best to use a specific tag or commit URL, not a branch URL."
+        // "Since files are not refreshed after the first request, it's best
+        // to use a specific tag or commit URL, not a branch URL."
 
         // Make sure to comment out / in the right getURL line.
 
-        // XXX This won't work in Firefox because an old bug and won't work in Chrome because of security stuff:
-        //getURL("glance-bookmarklet.html", function(data){
-
-        //getURL("https://rawgit.com/raymond-w-ko/Glance-Bookmarklet/master/glance-bookmarklet.html", function(data){
+        // XXX This won't work in Firefox because an old bug and won't work in
+        // Chrome because of security stuff:
+        // getURL("glance-bookmarklet.html", function(data){
 
         // getURL("https://rawgit.com/raymond-w-ko/Glance-Bookmarklet/dev/glance-bookmarklet.html", function(data){
 
         // XXX Make sure to replace the commit hash with the wanted one.
-        getURL("https://cdn.rawgit.com/raymond-w-ko/Glance-Bookmarklet/1428217432658e577359f9626074a8e2764775b5/glance-bookmarklet.html", function(data){
-
+        var commit = '';
+        getURL("https://cdn.rawgit.com/raymond-w-ko/Glance-Bookmarklet/" + commit + "/glance-bookmarklet.html", function(data) {
             var glanceBookmarkletContainer = document.getElementById("glance_bookmarklet_container");
 
             if (!glanceBookmarkletContainer) {
@@ -150,23 +149,20 @@ function glanceBookmarkletify(input){
         }
     });
 
-    function updateValues(i) {
-
+    function showWordAtIndex(i) {
         var p = pivot(all_words[i]);
         document.getElementById("glance_bookmarklet_result").innerHTML = p;
         currentWord = i;
-
     }
 
     function startGlanceBookmarklet() {
-
         document.getElementById("glance_bookmarklet_toggle").style.display = "block";
         document.getElementById("glance_bookmarklet_toggle").textContent = "Pause";
 
         running = true;
 
         glanceBookmarkletTimers.push(setInterval(function() {
-            updateValues(currentWord);
+            showWordAtIndex(currentWord);
             currentWord++;
             if(currentWord >= all_words.length) {
                 currentWord = 0;
@@ -176,8 +172,8 @@ function glanceBookmarkletify(input){
     }
 
     function stopGlanceBookmarklet() {
-        for(var i = 0; i < glanceBookmarkletTimers.length; i++) {
-            clearTimeout(glanceBookmarkletTimers[i]);
+        while (glanceBookmarkletTimers.length > 0) {
+            clearTimeout(glanceBookmarkletTimers.pop());
         }
 
         document.getElementById("glance_bookmarklet_toggle").textContent = "Play";
@@ -188,7 +184,7 @@ function glanceBookmarkletify(input){
 }
 
 // Find the red-character of the current word.
-function pivot(word){
+function pivot(word) {
     var length = word.length;
 
     var bestLetter = 1;
@@ -254,10 +250,11 @@ function getSelectionText() {
             text = document.selection.createRange().text;
         }
     }
-    if(text === ""){
+    // unselect text as usually text selection color is bright and distracting.
+    window.getSelection().removeAllRanges();
+    if(text === "") {
         return false;
-    }
-    else{
+    } else {
         return text;
     }
 }
@@ -266,48 +263,48 @@ function getSelectionText() {
 function glanceBookmarkletifyURL(){
     var url = document.URL;
 
+    function presentText(data) {
+        data = JSON.parse(data);
+
+        if(data.error) {
+            document.getElementById("glance_bookmarklet_result").innerText = "Article extraction failed. Try selecting text instead.";
+            return;
+        }
+
+        var title = '';
+        if(data.title !== "") {
+            title = data.title + ". ";
+        }
+
+        var author = '';
+        if(data.author !== undefined) {
+            author = "By " + data.author + ". ";
+        }
+
+        var body = data.text;
+        body = body.trim(); // Trim trailing and leading whitespace.
+        body = body.replace(/\s+/g, ' '); // Shrink long whitespaces.
+
+        var text_content = title + author + body;
+        text_content = text_content.replace(/\./g, '. '); // Make sure punctuation is apprpriately spaced.
+        text_content = text_content.replace(/\?/g, '? ');
+        text_content = text_content.replace(/\!/g, '! ');
+        glanceBookmarkletify(text_content);
+    }
+
     //getURL("https://www.readability.com/api/content/v1/parser?url="+ encodeURIComponent(url) +"&token=" + readability_token +"&callback=?",
     getURL("https://api.diffbot.com/v2/article?url="+ encodeURIComponent(url) +"&token=" + diffbot_token, // +"&callback=?",
-        function(data) {
-
-            data = JSON.parse(data);
-
-            if(data.error){
-                document.getElementById("glance_bookmarklet_result").innerText = "Article extraction failed. Try selecting text instead.";
-                return;
-            }
-
-            var title = '';
-            if(data.title !== ""){
-                title = data.title + ". ";
-            }
-
-            var author = '';
-            if(data.author !== undefined){
-                author = "By " + data.author + ". ";
-            }
-
-            var body = data.text;
-            body = body.trim(); // Trim trailing and leading whitespace.
-            body = body.replace(/\s+/g, ' '); // Shrink long whitespaces.
-
-            var text_content = title + author + body;
-            text_content = text_content.replace(/\./g, '. '); // Make sure punctuation is apprpriately spaced.
-            text_content = text_content.replace(/\?/g, '? ');
-            text_content = text_content.replace(/\!/g, '! ');
-            glanceBookmarkletify(text_content);
-        });
+           presentText);
 
 }
 
-//////
+////////////////////////////////////////////////////////////////////////////////
 // Helpers
-//////
+////////////////////////////////////////////////////////////////////////////////
 
 // This is a hack using the fact that browers sequentially id the timers.
 function clearTimeouts(){
     var id = window.setTimeout(function() {}, 0);
-
     while (id--) {
         window.clearTimeout(id);
     }
@@ -315,14 +312,14 @@ function clearTimeouts(){
 
 // Let strings repeat themselves,
 // because JavaScript isn't as awesome as Python.
-String.prototype.repeat = function( num ){
-    if(num < 1){
-        return new Array( Math.abs(num) + 1 ).join( this );
+String.prototype.repeat = function( num ) {
+    if (num < 1){
+        return new Array(Math.abs(num) + 1).join(this);
     }
-    return new Array( num + 1 ).join( this );
+    return new Array(num + 1).join(this);
 };
 
-function decodeEntities(s){
+function decodeEntities(s) {
     var str, temp= document.createElement('p');
     temp.innerHTML= s;
     str= temp.textContent || temp.innerText;

@@ -28,7 +28,7 @@ body{
     background-color: #002b36;
     color: #839496;
     /* 600px+; small tablet portrait */
-    width: 440px;
+    width: 340px;
     margin-left: auto;
     margin-right: auto;
     line-height: 43px;
@@ -42,22 +42,25 @@ body{
     padding-bottom: 9px;
     min-height: 40px;
     font-size: 32px;
+    white-space: nowrap;
 }
 
 #guide_top, #guide_bottom{
-    text-align: center;
+    text-align: left;
     font-family: 'Droid Sans Mono', sans-serif;
     color: #839496;
     /* 600px+; small tablet portrait */
     font-size: 32px;
+    color: #586e75;
 }
 #guide_top {
     border-style: none;
-    border-bottom: thick solid #839496;
+    border-bottom: 2px solid #586e75;
 }
 #guide_bottom {
     border-style: none;
-    border-top: thick solid #839496;
+    border-top: 2px solid #586e75;
+    line-height: 32px;
 }
 
 #notch{
